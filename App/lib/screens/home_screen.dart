@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
             left: 20.0,
             child: ElevatedButton(
               onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context) => PetDetailsScreen()));
+                               Navigator.push(context, MaterialPageRoute(builder: (context) => PetDetailsScreen(petDetails:Map(),)));
               },
               child: Padding(
                 padding: const EdgeInsets.all(16.0), // Increase padding

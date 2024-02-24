@@ -1,22 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// Define a ChangeNotifier for managing the theme
-class ThemeNotifier with ChangeNotifier {
-  ThemeData _themeData = ThemeData.light(); // Default to light theme
-
-  ThemeData getTheme() => _themeData;
-
-  void setTheme(ThemeData themeData) {
-    _themeData = themeData;
-    notifyListeners(); // Notify listeners of the theme change
-  }
-}
-
 void main() {
   runApp(
     ChangeNotifierProvider<ThemeNotifier>(
-      create: (_) => ThemeNotifier(), // Create a ThemeNotifier instance
+      create: (_) => ThemeNotifier(),
       child: MyApp(),
     ),
   );
@@ -27,9 +15,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Theme Demo',
-      theme: Provider.of<ThemeNotifier>(context).getTheme(), // Get the current theme from the provider
+      theme: Provider.of<ThemeNotifier>(context).getTheme(),
       home: ThemeSettingsPage(),
     );
+  }
+}
+
+class ThemeNotifier with ChangeNotifier {
+  ThemeData _themeData = ThemeData.light();
+
+  ThemeData getTheme() => _themeData;
+
+  void setTheme(ThemeData themeData) {
+    _themeData = themeData;
+    notifyListeners();
   }
 }
 
@@ -45,7 +44,6 @@ class ThemeSettingsPage extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              // Set light theme and notify listeners
               Provider.of<ThemeNotifier>(context, listen: false).setTheme(ThemeData.light());
             },
             child: ListTile(
@@ -55,7 +53,6 @@ class ThemeSettingsPage extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              // Set dark theme and notify listeners
               Provider.of<ThemeNotifier>(context, listen: false).setTheme(ThemeData.dark());
             },
             child: ListTile(

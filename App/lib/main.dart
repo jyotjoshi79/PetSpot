@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+
+// import 'screens/forget_password_page.dart';
 // import 'package:petspot_app/petspottracker.dart';
 // import 'AccountSettingsPage.dart';
 // import 'home_page.dart';
 // import 'package:petspot_app/petspottracker.dart';
-import 'package:petspot_app/screens/home_screen.dart';
+// import 'package:petspot_app/screens/home_screen.dart';
+
+import 'screens/login_page.dart';
+// import 'screens/signup_page.dart';
 // import 'package:petspot_app/screens/pets_detail_screen.dart';
 // import 'package:firebase_core/firebase_core.dart';
 //import 'package:cloud_firestore';
@@ -40,7 +45,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen (),
+      home: LoginPage (),
     );
   }
 }

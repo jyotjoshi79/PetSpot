@@ -56,6 +56,12 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: "^0.13.1"
 
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^5.0.0
+
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
@@ -79,6 +85,7 @@ flutter:
     - assets/cat.jpeg
     - assets/logo2.jpg
     - assets/pets1.jpeg
+    - assets/WhatsApp Image 2024-02-24 at 10.05.56.jpeg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
