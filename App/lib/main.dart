@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:petspot_app/petspottracker.dart';
 import 'package:petspot_app/screens/home_screen.dart';
 // import 'package:petspot_app/screens/pets_detail_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 //import 'package:cloud_firestore';
 
 void main() {
