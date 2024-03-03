@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petspot_app/AccountSettingsPage.dart';
 import 'package:petspot_app/add_pet.dart';
-import 'package:petspot_app/petspottracker.dart';
+// import 'package:petspot_app/petspottracker.dart';
 import 'package:petspot_app/screens/pets_detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
