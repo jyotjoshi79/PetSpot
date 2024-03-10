@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "962292591538",
+    "project_id": "petspot-c603a",
+    "storage_bucket": "petspot-c603a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962292591538:android:e94f32d5d129f8568792ab",
+        "android_client_info": {
+          "package_name": "com.example.petspot_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP9cse5pD2e_N_qd25QeC_0mxs0zwuzPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
