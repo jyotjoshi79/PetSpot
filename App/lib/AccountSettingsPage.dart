@@ -134,7 +134,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 import 'package:flutter/material.dart';
 // import 'package:petspot_app/theme_settings.dart';
 import 'profile_picture.dart';
- import 'theme_settings.dart';
+ import 'screens/provider.dart';
+import 'theme_settings.dart';
 import 'account_details.dart';
 
 class AccountSettingsPage extends StatefulWidget {
@@ -187,17 +188,18 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 ),
               ),
               // Button for Theme
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ThemeSettingsPage()),
-                  );
-                },
-                child: ListTile(
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.push(context,
+              //       MaterialPageRoute(builder: (context) => ThemeSettingsPage()),
+              //     );
+              //   },
+                // child: 
+                ListTile(
                   title: const Text('Theme'),
                   trailing: const Icon(Icons.arrow_forward_ios),
                 ),
-              ),
+              
               // Button for Account
               InkWell(
                 onTap: () {

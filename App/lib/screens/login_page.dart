@@ -76,7 +76,8 @@ class LoginPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (context) => HomeScreen()),
                         );
-                      } else {
+                      } 
+                      else {
                         // Show an error message if credentials are incorrect
                         showDialog(
                           context: context,

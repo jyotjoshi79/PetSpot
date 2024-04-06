@@ -25,10 +25,38 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Theme Demo',
-      theme: Provider.of<ThemeNotifier>(context).getTheme(), // Get the current theme from the provider
-      home: ThemeSettingsPage(),
+    return Consumer<ThemeNotifier>(
+      builder: (context, themeNotifier, _) => MaterialApp(
+        title: 'PetSpot',
+        theme: themeNotifier.getTheme(), // Get the current theme from the provider
+        home: HomeScreen(),
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PetSpot'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Navigate to the theme settings page
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ThemeSettingsPage()));
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Text(
+          'Welcome to PetSpot!',
+          style: Theme.of(context).textTheme.headline4,
+        ),
+      ),
     );
   }
 }
