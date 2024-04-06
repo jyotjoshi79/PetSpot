@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                SizedBox(height: 10),
                const Text(
                  'Welcome to PetSpot!',
-                 style: TextStyle(fontSize: 24),
+                 style: TextStyle(fontSize: 30),
                ),
                SizedBox(height: 10),
                ElevatedButton(
@@ -56,13 +56,11 @@ class HomeScreen extends StatelessWidget {
                    },
                    child: Text(
                      'Know the Pets',
-                     style: TextStyle(fontSize: 18),
+                     style: TextStyle(fontSize: 20),
                    ),
                    style: ElevatedButton.styleFrom(
-                     shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(10),
-                     ),
-                   ),
+                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                 ),
                  ),
                ),
              ],
