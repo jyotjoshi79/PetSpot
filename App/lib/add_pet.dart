@@ -1,97 +1,8 @@
-// import 'package:flutter/material.dart';
-
-// class AddPetPage extends StatefulWidget {
-//   final Function(Map<String, dynamic>) onPetAdded;
-
-//   const AddPetPage({Key? key, required this.onPetAdded}) : super(key: key);
-
-//   @override
-//   _AddPetPageState createState() => _AddPetPageState();
-// }
-
-// class _AddPetPageState extends State<AddPetPage> {
-//   final _petNameController = TextEditingController();
-//   final _petBreedController = TextEditingController();
-//   final _petHeightController = TextEditingController();
-//   final _petWeightController = TextEditingController();
-//   final _petBirthDateController = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Add Pet'),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: const EdgeInsets.all(20.0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               const Text('Pet Name'),
-//               TextFormField(
-//                 controller: _petNameController,
-//                 decoration: const InputDecoration(hintText: 'Bella'),
-//               ),
-//               const SizedBox(height: 20),
-//               const Text('Pet Breed'),
-//               TextFormField(
-//                 controller: _petBreedController,
-//                 decoration: const InputDecoration(hintText: 'Shih-Tzu'),
-//               ),
-//               const SizedBox(height: 20),
-//               const Text('Pet Height (cm)'),
-//               TextFormField(
-//                 controller: _petHeightController,
-//                 decoration: const InputDecoration(hintText: 'in cm'),
-//                 keyboardType: TextInputType.number,
-//               ),
-//               const SizedBox(height: 20),
-//               const Text('Pet Weight (kg)'),
-//               TextFormField(
-//                 controller: _petWeightController,
-//                 decoration: const InputDecoration(hintText: 'in kg'),
-//                 keyboardType: TextInputType.number,
-//               ),
-//               const SizedBox(height: 20),
-//               const Text('Pet Birth Date'),
-//               TextFormField(
-//                 controller: _petBirthDateController,
-//                 decoration: const InputDecoration(hintText: '01-01-2023'),
-//                 keyboardType: TextInputType.datetime,
-//               ),
-//               const SizedBox(height: 20),
-//               ElevatedButton(
-//                 onPressed: () {
-//                  // CollectionReference collRef = FirebaseFirestore.instance.collection('pet');
-//                   // Gather pet information
-//                   Map<String, dynamic> petData = {
-//                     'name': _petNameController.text,
-//                     'breed': _petBreedController.text,
-//                     'height': double.tryParse(_petHeightController.text) ?? 0.0,
-//                     'weight': double.tryParse(_petWeightController.text) ?? 0.0,
-//                     'birthDate': _petBirthDateController.text,
-//                   };
-
-//                   // Pass the pet data to the callback
-//                   widget.onPetAdded(petData);
-
-//                   // Navigate back to the previous screen
-//                   Navigator.pop(context);
-//                 },
-//                 child: const Text('Add Pet'),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddPetPage extends StatefulWidget {
-  final Function(Map<String, dynamic>) onPetAdded;
+  final Function(Map<String, dynamic>, String) onPetAdded;
 
   const AddPetPage({Key? key, required this.onPetAdded}) : super(key: key);
 
@@ -105,6 +16,9 @@ class _AddPetPageState extends State<AddPetPage> {
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
+
+  // Reference to Firestore
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -141,16 +55,34 @@ class _AddPetPageState extends State<AddPetPage> {
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                // Convert height and weight to doubles
+                double height = double.tryParse(_heightController.text) ?? 0.0;
+                double weight = double.tryParse(_weightController.text) ?? 0.0;
+
+                // Create a new pet map
                 final newPet = {
                   'name': _nameController.text,
                   'breed': _breedController.text,
-                  'height': double.tryParse(_heightController.text) ?? 0.0,
-                  'weight': double.tryParse(_weightController.text) ?? 0.0,
+                  'height': height,
+                  'weight': weight,
                   'birthDate': _birthDateController.text,
                 };
-                widget.onPetAdded(newPet);
-                Navigator.pop(context);
+
+                // Add the new pet to Firestore
+                try {
+                  // Add the new pet to Firestore and get the generated ID
+                  DocumentReference docRef = await _firestore.collection('pets').add(newPet);
+                  String petId = docRef.id;
+
+                  // Notify the parent widget about the addition of the pet along with the pet ID
+                  widget.onPetAdded(newPet, petId);
+                  Navigator.pop(context);
+                } catch (e) {
+                  // Handle errors if any
+                  print('Error adding pet: $e');
+                  // You can display an error message to the user here
+                }
               },
               child: Text('Add Pet'),
             ),

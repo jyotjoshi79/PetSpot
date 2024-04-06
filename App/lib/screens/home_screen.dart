@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PetDetailsScreen(petDetails: Map(),)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PetDetailsScreen(petDetails: Map(), petId: '',)));
                     },
                     child: Text(
                       'Know the Pets',
@@ -116,7 +116,19 @@ class HomeScreen extends StatelessWidget {
             right: 20.0,
             child: FloatingActionButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>  AddPetPage(onPetAdded: (String ) { 'Its added'; },)));
+                // ignore: non_constant_identifier_names, avoid_types_as_parameter_names
+              Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => AddPetPage(
+      onPetAdded: (String petId) {
+        return "Its added";
+      },
+    ),
+  ),
+);
+
+
               },
               child: Icon(Icons.add),
             ),
